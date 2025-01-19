@@ -7,6 +7,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
+  mode: "development",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -24,9 +26,13 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "frontend-assignment",
-    }),
-  ],
+  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "dist"),
+    },
+    hot: true,
+    open: true,
+    port: 3000,
+  },
 };
